@@ -26,22 +26,7 @@
   }
 
   function findSettingsButton() {
-    // Try known data-element-ids first
-    const byId =
-      document.querySelector('[data-element-id="settings-button"]') ||
-      document.querySelector('[data-element-id="open-settings-button"]') ||
-      document.querySelector('[data-element-id="settings-nav-item"]');
-    if (byId) return byId;
-
-    // Fall back to aria-label or title
-    const byLabel =
-      document.querySelector('[aria-label="Settings"]') ||
-      document.querySelector('[title="Settings"]');
-    if (byLabel) return byLabel;
-
-    // Last resort: find a button/link containing "Settings" text in the sidebar
-    const allButtons = Array.from(document.querySelectorAll('button, a'));
-    return allButtons.find(b => b.textContent.trim().includes('Settings')) || null;
+    return document.querySelector('[data-element-id="workspace-tab-settings"]') || null;
   }
 
   function addButton() {
