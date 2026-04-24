@@ -41,14 +41,16 @@
 
     // Mirror the layout of the sidebar nav buttons (icon column — likely icon-only)
     const isIconOnly = settingsBtn.offsetWidth < 60;
-    btn.innerHTML = isIconOnly ? '&#128640;' : '&#128640; Export to Obsidian';
+    btn.innerHTML = isIconOnly
+      ? '<span style="font-size:20px;line-height:1;">&#128640;</span><span style="font-size:11px;margin-top:2px;">Export</span>'
+      : '&#128640; Export to Obsidian';
 
     btn.style.cssText = [
-      'display:flex', 'align-items:center', 'justify-content:center', 'gap:6px',
-      'width:100%', 'padding:8px',
+      'display:flex', 'flex-direction:column', 'align-items:center', 'justify-content:center', 'gap:0',
+      'width:100%', 'padding:8px 4px',
       'background:transparent', 'color:inherit',
       'border:none', 'border-radius:6px',
-      'cursor:pointer', 'font-size:' + (isIconOnly ? '20px' : '13px'),
+      'cursor:pointer', 'font-size:13px',
       'margin-bottom:4px',
     ].join(';');
 
