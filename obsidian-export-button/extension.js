@@ -41,7 +41,7 @@
 
     // Last resort: find a button/link containing "Settings" text in the sidebar
     const allButtons = Array.from(document.querySelectorAll('button, a'));
-    return allButtons.find(b => b.textContent.trim() === 'Settings') || null;
+    return allButtons.find(b => b.textContent.trim().includes('Settings')) || null;
   }
 
   function addButton() {
