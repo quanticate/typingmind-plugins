@@ -1,5 +1,5 @@
 (function () {
-  const PROMPT = "Can you export this chat to markdown please and save it here: E:\\Data\\Obsidian\\hg_vault\\mcp\\scrap\\dump";
+  const PROMPT = "Can you export this chat to markdown please and save it here: E:\\Data\\Obsidian\\hg_vault\\mcp\\chat-exports. Ensure the filename reflects the title of the chat. If there's no title then choose a title that matches the topic of the chat.";
   const BTN_ID = 'tm-obsidian-export-btn';
 
   function sendPrompt() {
