@@ -1,0 +1,31 @@
+{
+  "uuid": "export-chat-markdown-v1",
+  "emoji": "📄",
+  "title": "Export Chat to Markdown",
+  "overviewMarkdown": "Exports the full current conversation to a downloadable `.md` file.\n\nTo use: ask the AI to *\"export this chat\"* or *\"save this conversation as markdown\"*.",
+  "authenticationType": "AUTH_TYPE_NONE",
+  "permissions": [],
+  "userSettings": [],
+  "pluginContext": "When the user asks to export, save, or download this chat or conversation, call the export_chat_to_markdown function. Before calling it, compile the COMPLETE conversation — every user message and every assistant reply — into Markdown format. Use '## User' and '## Assistant' as headings before each message. Preserve all code blocks, lists, formatting, and the full text of every message. Do not summarize or truncate anything.",
+  "openAPISpec": {
+    "name": "export_chat_to_markdown",
+    "description": "Export the full current conversation to a downloadable Markdown (.md) file. Call this when the user asks to export, save, or download the chat.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The COMPLETE conversation formatted as Markdown. Must include ALL messages — every user message and every assistant reply — with ## User and ## Assistant headings. Do not summarize or truncate."
+        },
+        "filename": {
+          "type": "string",
+          "description": "Optional filename without the .md extension (e.g. 'my-chat'). Defaults to chat-export-YYYY-MM-DD."
+        }
+      },
+      "required": ["content"]
+    }
+  },
+  "implementationType": "javascript",
+  "implementationCode": "async function export_chat_to_markdown({ content, filename }, userSettings, resources) {\n  const date = new Date().toISOString().split('T')[0];\n  const safeFilename = (filename || `chat-export-${date}`).replace(/[^a-z0-9_-]/gi, '-');\n  const exportFilename = `${safeFilename}.md`;\n  const encoded = btoa(unescape(encodeURIComponent(content)));\n  const dataUri = `data:text/markdown;charset=utf-8;base64,${encoded}`;\n  return `<div style='font-family:sans-serif;padding:12px;'><a href='${dataUri}' download='${exportFilename}' style='display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;font-weight:500;'>&#11015; Download ${exportFilename}</a><p style='margin:8px 0 0;font-size:12px;color:#6b7280;'>Click to save the full conversation as a Markdown file.</p></div>`;\n}",
+  "outputType": "render-html"
+}
